@@ -1,6 +1,6 @@
 /*
  *  Rsrv.h : constants and macros for Rserve client/server architecture
- *  Copyright (C) 2002-24 Simon Urbanek
+ *  Copyright (C) 2002-26 Simon Urbanek
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published
@@ -32,7 +32,7 @@
 #include "config.h"
 #endif
 
-#define RSRV_VER 0x010817 /* Rserve v1.8-17 */
+#define RSRV_VER 0x010818 /* Rserve v1.8-18 */
 
 #define default_Rsrv_port 6311
 
