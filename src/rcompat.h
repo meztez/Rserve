@@ -39,6 +39,23 @@
 #undef CLOENV
 #endif
 #define CLOENV(X) R_ClosureEnv(X)
+
+#ifdef Rf_findVar
+#undef Rf_findVar
+#endif
+#define Rf_findVar(X, Y) R_getVar(X, Y, TRUE)
+#ifndef findVar
+#define findVar Rf_findVar
+#endif
+
+#ifdef Rf_findVarInFrame
+#undef Rf_findVarInFrame
+#endif
+#define Rf_findVarInFrame(X, Y) R_getVar(X, Y, FALSE)
+#ifndef findVarInFrame
+#define findVarInFrame Rf_findVarInFrame
+#endif
+
 #endif /* R 4.5.0 */
 
 #if (R_VERSION >= R_Version(4,6,0))
