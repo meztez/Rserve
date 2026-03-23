@@ -22,7 +22,7 @@ static SEXP oc_env;
 SEXP oc_resolve(const char *ref) {
     SEXP val;
     if (!oc_env) return R_NilValue;
-    val = findVarInFrame(oc_env, install(ref));
+    val = findVarInFrame(install(ref), oc_env);
     if (val == R_UnboundValue) val = R_NilValue;
     return val;
 }
