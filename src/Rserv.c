@@ -2735,7 +2735,7 @@ static void setup_workdir(void) {
 void Rserve_cleanup(void) {
 	/* run .Rserve.done() if present */
 	SEXP fun, fsym = install(".Rserve.done");
-	fun = findVarInFrame(fsym, R_GlobalEnv);
+	fun = findVarInFrame(R_GlobalEnv, fsym);
 	if (Rf_isFunction(fun)) {
 		int Rerror = 0;
 #ifdef unix
@@ -3450,7 +3450,7 @@ int OCAP_iteration(qap_runtime_t *rt, struct phdr *oob_hdr) {
 		else if (std_fw_fd > 0 && FD_ISSET(std_fw_fd, &readfds)) which = 3;
 		
 		if (use_idle_callback && which == 0) {
-			SEXP var = findVarInFrame(install(".ocap.idle"), R_GlobalEnv);
+			SEXP var = findVarInFrame(R_GlobalEnv, install(".ocap.idle"));
 			if (Rf_isFunction(var)) { /* idle callback */
 				SEXP l = PROTECT(lang1(var));
 				int errf = 0;
@@ -5048,7 +5048,7 @@ static void handle_server_event(void *which) {
 	{ /* if there was an actual connection, offer to run .Rserve.served */
 		SEXP fun, fsym = install(".Rserve.served");
 		int evalErr = 0;
-		fun = findVarInFrame(fsym, R_GlobalEnv);
+		fun = findVarInFrame(R_GlobalEnv, fsym);
 		if (Rf_isFunction(fun))
 			R_tryEval(lang1(fsym), R_GlobalEnv, &evalErr);
 	}
@@ -5210,7 +5210,7 @@ void serverLoop(void) {
 				if (succ) { /* if there was an actual connection, offer to run .Rserve.served */
 					SEXP fun, fsym = install(".Rserve.served");
 					int evalErr = 0;
-					fun = findVarInFrame(fsym, R_GlobalEnv);
+					fun = findVarInFrame(R_GlobalEnv, fsym);
 					if (Rf_isFunction(fun))
                         R_tryEval(lang1(fsym), R_GlobalEnv, &evalErr);
 				}
